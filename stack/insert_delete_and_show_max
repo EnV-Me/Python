@@ -1,4 +1,3 @@
-stack = []
 def push(n) :
     stack.insert(len(stack),n)
 def pop():
@@ -10,7 +9,9 @@ def display_instruction() :
     print("1 - insert element")
     print("2 - delete last element")
     print("3 - delete uppermost occurence of element")
-    print("4 - view stack")
+    print("4 - Show Maximum number")
+    print("5 - view stack")
+    print("6 - exit")
 
 def delete_specific(n,stack) :
     if stack.count(n) > 0 :
@@ -21,19 +22,35 @@ def delete_specific(n,stack) :
         stack = dup_stack
     else :
         print("element is not present in stack")
+def show_max(dup_stack) :
+    if len(dup_stack) != 0 :
+        dup_stack.sort()
+        dup_stack.reverse()
+        print(dup_stack[0])
+    else :
+        print("Stack is empty")
 
+stack = []
 p=1
 while p >= 0 :
+    dup_stack = []
     k = int(input("Enter 0 for instruction or number for altering stack \n"))
     if k == 0 :
         (display_instruction())
     elif k == 1 :
-        n = input("Enter number to push \t")
+        n = int(input("Enter number to push \n"))
         push(n)
     elif k == 2 :
         pop()
     elif k == 3 :
-        n = input("number to delete \t")
+        n = int(input("number to delete \n"))
         delete_specific(n,stack)
     elif k == 4 :
+        dup_stack = [int(i) for i in stack]
+        show_max(dup_stack)
+    elif k == 5 :
         print(stack)
+    elif k == 6 :
+        quit()
+    else :
+        print("Invalid entry")
