@@ -1,0 +1,27 @@
+def enqueue(n) :
+    queue.insert(len(queue),n)
+def dequeue() :
+    queue.pop(0)
+
+def instructions() :
+    print("1 - enqueue")
+    print("2 - dequeue")
+    print("3 - show list")
+    print("4 - exit")
+
+input_queue = input("Type out queue (single space seperated) \n")
+queue = [int(i) for i in input_queue.split(" ")]
+p = 1
+while p > 0 :
+    k = int(input("Enter 0 for instruction or number to alter queue  \n"))
+    if k == 0 :
+        instructions()
+    elif k == 1 :
+        n = int(input("Enter number to enqueue \n"))
+        enqueue(n)
+    elif k == 2 :
+        dequeue()
+    elif k == 3 :
+        print(queue)
+    elif k == 4 :
+        quit()
