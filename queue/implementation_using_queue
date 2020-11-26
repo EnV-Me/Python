@@ -1,0 +1,70 @@
+class queue :
+    def __init__(self, c):
+        self.queue = []
+        self.front = self.rear = 0
+        self.capacity = c
+
+    def enqueue(self,n) :
+        if self.rear == self.capacity :
+            print("List is full")
+        else :
+            self.queue.append(n)
+            self.rear += 1
+
+    def dequeue(self) :
+        if self.front == self.rear :
+            print("Queue is empty")
+        else :
+            self.queue.pop(0)
+
+    def instructions(self) :
+        print("1 - Enqueue")
+        print("2 - Dequeue")
+        print("3 - Show the first element")
+        print("4 - Show last element")
+        print("5 - Show queue")
+        print("6 - Change capacity")
+        print("7 - Exit")
+
+    def show_first(self) :
+        if self.front == self.rear :
+            print("Queue is empty")
+        else :
+            print(self.queue[self.front])
+
+    def show_last(self):
+        if self.front == self.rear :
+            print("Queue is empty")
+        else :
+            print(self.queue[self.rear])
+
+
+
+
+input_capacity = int(input("Capacity of queue \n"))
+q = queue(input_capacity)
+p = 1
+while p > 0 :
+    k = int(input("Enter 0 for instruction or number to alter queue  \n"))
+    if k == 0 :
+        q.instructions()
+    elif k == 1 :
+        n = int(input("Enter number to enqueue \n"))
+        q.enqueue(n)
+    elif k == 2 :
+        q.dequeue()
+    elif k == 3 :
+        q.show_first()
+    elif k == 4 :
+        q.show_last()
+    elif k == 5 :
+        print(q)
+    elif k == 6 :
+        new_capacity = int(input("Enter new capacity"))
+        if q.rear < new_capacity :
+            print("Enterd capacity cannot accomodate presnt elements")
+            new_capacity = int(input("Enter new capacity"))
+        else :
+            q.capacity = new_capacity
+    elif k == 7 :
+        quit()
