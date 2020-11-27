@@ -1,0 +1,132 @@
+class Node:
+    def __init__(self, data=None):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def getcount(self, node):
+        if node != None:
+            return 0
+        else:
+            return 1 + self.getcount(node.next)
+
+    def insert_in_sorted_order(self,new_data):
+        new_node = Node(new_data)
+        if self.head is None:
+            new_node.next = self.head
+            self.head = new_node
+
+        elif self.head.data >= new_node.data :
+            new_node.next = self.head
+            self.head = new_node
+
+        else :
+            current = self.head
+            while (current.next != None and current.next.data < new_node.data):
+                current = current.next
+            new_node.next = current.next
+            current.next = new_node
+
+    def printList(self):
+        temp = self.head
+        while (temp):
+            print(temp.data)
+            temp = temp.next
+
+    def searchelement(self,n) :
+        if self.head is None :
+            print("Cant search empty set")
+        else :
+            check = self.head
+            while check != None :
+                if int(check.data) == n :
+                    print(f'Element is present')
+                    return
+                check = check.next
+            print("Element not found")
+
+    def delete_element(self,n):
+        check = self.head
+        while check.next != None :
+            if int(check.next.data) == n :
+                check.next = check.next.next
+                return
+            check = check.next
+        print("Can't delete element which is not present in linked list")
+
+    def find_maximum(self):
+        check = self.head
+        k = []
+        k.append(check.data)
+        while check.next != None :
+            if k[0] <= check.next.data :
+                k.pop()
+                k.append(check.next.data)
+            check = check.next
+        print(k[0])
+
+    def find_minimum(self):
+        check = self.head
+        k = []
+        k.append(check.data)
+        while check.next != None:
+            if k[0] >= check.next.data:
+                k.pop()
+                k.append(check.next.data)
+            check = check.next
+        print(k[0])
+
+    def insert_at_end(self,n):
+        new_node = Node(n)
+        if self.head == None :
+            self.head = new_node
+            return
+        current = self.head
+        while current.next != None :
+            current = current.next
+        current.next = new_node
+
+    def instructions(self):
+        print("1 - Insert at end")
+        print("2 - Sorted insert (if and only if linked list is already given in sorted form")
+        print("3 - Search if element is present or not")
+        print("4 - Delete element")
+        print("5 - Display Maximum")
+        print("6 - Display Minimum")
+        print("7 - Print Linked List")
+        print("8 - Exit")
+
+
+list = LinkedList()
+p = 1
+while p > 0 :
+    k = int(input("Enter 0 for instruction or number to alter linked list  \n"))
+    if k==0 :
+        list.instructions()
+    elif k == 1 :
+        new_data = int(input("Element to insert \n"))
+        list.insert_at_end(new_data)
+    elif k == 2:
+        new_data = int(input("Element to insert \n"))
+        list.insert_in_sorted_order(new_data)
+    elif k == 3 :
+        new_data = int(input("Element to check presence \n"))
+        list.searchelement(new_data)
+    elif k == 4 :
+        new_data = int(input("Element to delete"))
+        list.delete_element(new_data)
+    elif k == 5 :
+        list.find_maximum()
+    elif k == 6 :
+        list.find_minimum()
+    elif k == 7 :
+        list.printList()
+    elif k == 8 :
+        quit()
+    else :
+        print("Invalid Entry")
+
+
