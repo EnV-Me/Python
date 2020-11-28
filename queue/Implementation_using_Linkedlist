@@ -1,0 +1,89 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class Queue:
+    def __init__(self):
+        self.front = self.rear = None
+
+    def isEmpty(self):
+        if self.front == None :
+            return True
+        else :
+            return False
+
+    def enqueue(self,new_data):
+        new_node =Node(new_data)
+        if self.isEmpty() :
+            self.front = self.rear = new_node
+            return
+        self.rear.next = new_node
+        self.rear = new_node
+
+    def dequeue(self) :
+        if self.isEmpty() :
+            print("Queue is empty")
+        else :
+            removing_node = self.front
+            self.front = removing_node.next
+            if self.front == None :
+                self.rear = None
+            print(f'{removing_node.data} has been dequeued')
+
+    def show_first(self):
+        if self.isEmpty() :
+            print("Queue is empty")
+        else :
+            current = self.front
+            print(f'{current.data} is the first element in the queue')
+
+    def show_last(self):
+        if self.isEmpty() :
+            print("Queue is empty")
+        else :
+            current = self.rear
+            print(f'{current.data} is the last element in the queue')
+
+    def print_queue(self):
+        if self.isEmpty() :
+            print("Queue is empty")
+        else :
+            current = self.front
+            while current != None :
+                print(current.data,"<---",end=" ")
+                current = current.next
+            print("\n")
+
+
+    def instructions(self) :
+        print("1 - Enqueue")
+        print("2 - Dequeue")
+        print("3 - Show the first element")
+        print("4 - Show last element")
+        print("5 - Show queue")
+        print("6 - Exit")
+
+
+q = Queue()
+p = 1
+while p > 0 :
+    k = int(input("Enter 0 for instruction or number to alter queue  \n"))
+    if k == 0 :
+        q.instructions()
+    elif k == 1 :
+        n = int(input("Enter number to enqueue \n"))
+        q.enqueue(n)
+    elif k == 2 :
+        q.dequeue()
+    elif k == 3 :
+        q.show_first()
+    elif k == 4 :
+        q.show_last()
+    elif k == 5 :
+        q.print_queue()
+    elif k == 6 :
+        quit()
+    else :
+        print("Invalid Entry")
