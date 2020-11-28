@@ -1,0 +1,97 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Stack:
+    def __init__(self):
+        self.head = None
+
+    def isempty(self):
+        if self.head == None:
+            return True
+        else:
+            return False
+
+    def push(self,new_data):
+        if self.isempty() :
+            self.head = Node(new_data)
+        else :
+            new_node = Node(new_data)
+            new_node.next = self.head
+            self.head = new_node
+
+    def pop(self) :
+        if self.isempty() :
+            print("Can't pop from empty set")
+        else :
+            removed_node = self.head
+            self.head = self.head.next
+            removed_node.next = None
+            print(f'{removed_node.data} has been popped')
+
+    def print_stack(self):
+        current = self.head
+        if self.isempty() :
+            print("Stack is empty")
+        else :
+            while current != None :
+                print(current.data,"-->",end = " ")
+                current = current.next
+            print("\n")
+
+    def find_max(self):
+        if self.isempty() :
+            print("Stack is empty")
+        else :
+            current = self.head
+            k = []
+            k.append((self.head.data))
+            while current != None:
+                if k[0] <= current.data:
+                    k.pop()
+                    k.append(current.data)
+                current = current.next
+            print(f'The Maximum is {k[0]}')
+
+    def peek(self):
+        if self.isempty() :
+            print("Stack is empty")
+        else :
+            current = self.head
+            print(f'The top element is {current.data}')
+
+    def instructions(self):
+        print("1 - Push")
+        print("2 - Pop")
+        print("3 - Find maximum")
+        print("4 - Show Top element (peek)")
+        print("5 - check whether empty or not")
+        print("6 - Print stack")
+        print("7 - Exit")
+
+
+mystack = Stack()
+p = 1
+while p > 0 :
+    k = int(input("Enter 0 for instruction or number to alter queue  \n"))
+    if k == 0 :
+        mystack.instructions()
+    elif k == 1 :
+        n = int(input("Enter number to push \n"))
+        mystack.push((n))
+    elif k == 2 :
+        mystack.pop()
+    elif k == 3 :
+        mystack.find_max()
+    elif k == 4 :
+        mystack.peek()
+    elif k == 5 :
+        if (mystack.isempty()) :
+            print("Stack is empty")
+        else :
+            print("Stack is not empty")
+    elif k == 6 :
+        mystack.print_stack()
+    elif k == 7 :
+        quit()
