@@ -33,8 +33,9 @@ class LinkedList:
     def printList(self):
         temp = self.head
         while (temp):
-            print(temp.data)
+            print(temp.data,"--->",end = " ")
             temp = temp.next
+        print("\n")
 
     def searchelement(self,n) :
         if self.head is None :
